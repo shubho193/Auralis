@@ -1,4 +1,4 @@
-# Audio Stem Mixer
+# Auralis
 
 A Python program that takes multiple audio stems (drums, vocals, synth, bass, etc.) and mixes them together with adjustable parameters like gain, panning, and EQ. Now features a modern Web Interface with Authentication!
 
@@ -92,7 +92,7 @@ python audio_mixer.py <stems_directory> [output_file]
 ## Structure
 
 ```
-Audio Processor/
+Auralis/
 ├── audio_mixer.py          # Core mixer logic
 ├── web_server/             # FastAPI Backend
 │   ├── main.py             # API endpoints
