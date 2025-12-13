@@ -94,3 +94,4 @@ if __name__ == "__main__":
     print("\nNote: Make sure you have your stem files in the 'stems' directory")
     print("The auto-gain feature will analyze each stem and suggest optimal gain levels.")
 
+

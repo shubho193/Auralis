@@ -29,6 +29,8 @@ Required packages:
 - `librosa` - Audio processing and resampling
 - `scipy` - Signal processing (for filters)
 - `tensorflow` - Neural network for auto-gain (optional but recommended)
+- `kivy` - GUI framework (for graphical interface)
+- `kivymd` - Material Design components (optional)
 
 ## Quick Start
 
@@ -57,6 +59,23 @@ This will:
 - Analyze each stem using audio features
 - Automatically predict optimal gain values
 - Create an intelligent mix with no manual tuning needed
+
+### Graphical User Interface (GUI)
+
+Launch the beautiful Kivy-based GUI:
+
+```bash
+python audio_mixer_gui.py
+```
+
+Features:
+- 🎨 Modern, intuitive interface with animations
+- 🎵 Easy drag-and-drop stem management
+- 🤖 Toggle AI auto-gain on/off
+- 📊 Real-time progress visualization
+- ✅ Live status updates
+
+See [GUI_README.md](GUI_README.md) for detailed GUI documentation.
 
 ## Usage
 
@@ -222,6 +241,7 @@ The AI analyzes each stem and considers:
 Audio Processor/
 ├── audio_mixer.py          # Main mixer class
 ├── gain_predictor.py       # AI auto-gain predictor
+├── audio_mixer_gui.py      # GUI application
 ├── train_cnn_model.py      # CNN model training script
 ├── quick_start.py          # Basic quick start
 ├── quick_start_auto_gain.py # AI quick start
@@ -229,6 +249,7 @@ Audio Processor/
 ├── example_auto_gain.py    # Auto-gain examples
 ├── requirements.txt        # Dependencies
 ├── README.md              # This file
+├── GUI_README.md          # GUI documentation
 └── stems/                 # Put your stem files here
     ├── drums.wav
     ├── bass.wav

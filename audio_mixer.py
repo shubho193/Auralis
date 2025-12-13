@@ -103,7 +103,7 @@ class StemMixer:
         normalize_output: bool = True,
         auto_gain: bool = False,
         use_cnn: bool = False
-    ) -> np.ndarray:
+    ) -> Tuple[np.ndarray, Dict[str, float]]:
         gains = gains or {}
         pans = pans or {}
         high_pass_cutoffs = high_pass_cutoffs or {}
@@ -129,6 +129,7 @@ class StemMixer:
         
         # Process each stem
         mixed_audio = None
+        final_gains = {}
         
         for name, audio in stem_data.items():
             print(f"Processing {name}...")
@@ -138,6 +139,7 @@ class StemMixer:
             
             # Apply gain
             gain = gains.get(name, 0.0)
+            final_gains[name] = gain
             if gain != 0.0:
                 audio = self.apply_gain(audio, gain)
                 print(f"  Applied gain: {gain} dB")
@@ -146,7 +148,7 @@ class StemMixer:
             pan = pans.get(name, 0.0)
             if pan != 0.0:
                 audio = self.apply_pan(audio, pan)
-                print(f"  Applied pan: {pan}")
+                print(f"  Applied pan: {pan} (Shape: {audio.shape})")
             
             # Apply high-pass filter
             hp_cutoff = high_pass_cutoffs.get(name)
@@ -173,7 +175,7 @@ class StemMixer:
                 print(f"Normalizing output (max value: {max_val:.3f})")
                 mixed_audio = mixed_audio / max_val
         
-        return mixed_audio
+        return mixed_audio, final_gains
     
     def _mix_with_auto_gain(
         self,
@@ -184,24 +186,38 @@ class StemMixer:
         normalize_output: bool,
         use_cnn: bool,
         manual_gains: Dict[str, float]
-    ) -> np.ndarray:
+    ) -> Tuple[np.ndarray, Dict[str, float]]:
         """Mix stems with automatic gain prediction."""
+        
+        # Get predicted gains
         if use_cnn:
-            mixed_audio, predicted_gains = create_smart_mix_stems(
+            _, predicted_gains = create_smart_mix_stems(
                 stems, self, use_cnn=True, sample_rate=self.sample_rate
             )
         else:
-            mixed_audio, predicted_gains = create_smart_mix_stems(
+            _, predicted_gains = create_smart_mix_stems(
                 stems, self, use_cnn=False, sample_rate=self.sample_rate
             )
         
         print("\n=== PREDICTED GAIN SUMMARY ===")
         for name, gain in predicted_gains.items():
             print(f"  {name}: {gain:.2f} dB")
-        
-        return mixed_audio
+            
+        # Now perform the actual mix using the predicted gains AND the requested pans/filters
+        # We call mix_stems recursively but with auto_gain=False to avoid infinite loop
+        return self.mix_stems(
+            stems=stems,
+            gains=predicted_gains, # Use the predicted gains
+            pans=pans,
+            high_pass_cutoffs=high_pass_cutoffs,
+            low_pass_cutoffs=low_pass_cutoffs,
+            normalize_output=normalize_output,
+            auto_gain=False, # Important: Disable auto_gain to prevent recursion
+            use_cnn=False
+        )
     
     def save_audio(self, audio: np.ndarray, output_path: str):
+        print(f"Saving audio with shape: {audio.shape}")
         sf.write(output_path, audio, self.sample_rate)
         print(f"Saved mixed audio to {output_path}")
 

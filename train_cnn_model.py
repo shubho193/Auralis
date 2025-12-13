@@ -1,11 +1,3 @@
-"""
-Training script for CNN-based gain prediction model
-
-This script demonstrates how to train a CNN model on audio stems
-to predict optimal gain values. In production, you would use a
-large dataset of professionally mixed tracks.
-"""
-
 import numpy as np
 import os
 from typing import Dict, List, Tuple
@@ -13,19 +5,7 @@ from pathlib import Path
 
 
 class GainModelTrainer:
-    """
-    Trainer for CNN-based gain prediction model.
-    
-    This is a skeleton implementation showing the training pipeline.
-    For actual training, you would need:
-    1. A dataset of audio stems with expert mixing decisions
-    2. Data augmentation (volume variations, EQ changes, etc.)
-    3. Proper train/validation/test splits
-    4. Hyperparameter tuning
-    """
-    
     def __init__(self):
-        """Initialize the trainer."""
         pass
     
     def collect_training_data(
@@ -33,42 +13,13 @@ class GainModelTrainer:
         stems_dir: str, 
         labels_file: str
     ) -> Tuple[np.ndarray, np.ndarray]:
-        """
-        Collect training data from stems and expert labels.
-        
-        Args:
-            stems_dir: Directory containing stem folders
-            labels_file: File containing expert gain labels
-            
-        Returns:
-            Tuple of (features, labels)
-        """
         print("Collecting training data...")
-        # This would load actual data in production
         features_list = []
         labels_list = []
-        
-        # Placeholder implementation
-        # In production: iterate through dataset, extract features, load labels
         
         return np.array(features_list), np.array(labels_list)
     
     def create_model(self, input_shape: Tuple, n_outputs: int):
-        """
-        Create a CNN model for gain prediction.
-        
-        This is a simplified architecture. Production models might use:
-        - Spectrogram/mel-spectrogram as input
-        - Convolutional layers for feature extraction
-        - Dense layers for regression
-        
-        Args:
-            input_shape: Shape of input features
-            n_outputs: Number of output gain values
-            
-        Returns:
-            Compiled Keras model
-        """
         try:
             import tensorflow as tf
             from tensorflow import keras
@@ -113,20 +64,6 @@ class GainModelTrainer:
         epochs: int = 100,
         batch_size: int = 32
     ):
-        """
-        Train the CNN model.
-        
-        Args:
-            X_train: Training features
-            y_train: Training labels (gain values)
-            X_val: Validation features
-            y_val: Validation labels
-            epochs: Number of training epochs
-            batch_size: Batch size
-            
-        Returns:
-            Trained model
-        """
         print("Training model...")
         
         input_shape = (X_train.shape[1],)
@@ -137,7 +74,6 @@ class GainModelTrainer:
         if model is None:
             return None
         
-        # Callbacks
         callbacks = [
             keras.callbacks.EarlyStopping(
                 monitor='val_loss',
@@ -151,7 +87,6 @@ class GainModelTrainer:
             )
         ]
         
-        # Train
         history = model.fit(
             X_train, y_train,
             validation_data=(X_val, y_val) if X_val is not None else None,
@@ -164,7 +99,6 @@ class GainModelTrainer:
         return model, history
     
     def save_model(self, model, filepath: str):
-        """Save trained model to file."""
         if model is None:
             print("No model to save!")
             return
@@ -180,17 +114,6 @@ class GainModelTrainer:
 
 
 def generate_synthetic_data(n_samples: int = 1000) -> Tuple[np.ndarray, np.ndarray]:
-    """
-    Generate synthetic training data for demonstration.
-    
-    In production, use real professionally mixed audio.
-    
-    Args:
-        n_samples: Number of samples to generate
-        
-    Returns:
-        Tuple of (features, labels)
-    """
     print(f"Generating {n_samples} synthetic samples...")
     
     # Generate random features (would be real audio features in production)
@@ -208,11 +131,6 @@ def generate_synthetic_data(n_samples: int = 1000) -> Tuple[np.ndarray, np.ndarr
 
 
 def main():
-    """
-    Main training pipeline.
-    
-    This is a demonstration. Replace with real data collection.
-    """
     print("=" * 60)
     print("CNN Gain Prediction Model Trainer")
     print("=" * 60)
