@@ -124,7 +124,6 @@ const History = () => {
                                 </div>
                             )}
 
-                            {/* Waveform Player */}
                             <div style={{ marginTop: '20px' }}>
                                 <ResultWaveform url={`${API_URL}${item.output_url}`} />
                             </div>

@@ -16,8 +16,8 @@
 
 body {
   margin: 0;
-  font-family: 'Manrope', system-ui, -apple-system, sans-serif; /* Updated to Manrope */
-  background-color: var(--bg-color); /* Fallback dark blue */
+  font-family: 'Manrope', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-color);
   color: var(--text-main);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
@@ -25,7 +25,6 @@ body {
   position: relative;
 }
 
-/* Background Video */
 .bg-video {
   position: fixed;
   top: 0;
@@ -35,10 +34,8 @@ body {
   object-fit: cover;
   z-index: -1;
   filter: blur(25px) brightness(0.2);
-  transform: scale(1.1); /* Prevent blur edges */
+  transform: scale(1.1);
 }
-
-
 
 .app-container {
   max-width: 100%;
@@ -49,7 +46,6 @@ body {
   flex-direction: column;
 }
 
-/* Header Layout */
 .app-header {
   display: flex;
   justify-content: space-between;
@@ -85,7 +81,6 @@ body {
   margin-right: 10px;
 }
 
-/* Nav Buttons (History, Logout) */
 .nav-btn {
   display: flex;
   align-items: center;
@@ -114,7 +109,7 @@ body {
 
 .nav-btn.logout-btn {
   color: #ff4d4d;
-  border-color: rgba(255, 77, 77, 0.3); /* Subtle red border */
+  border-color: rgba(255, 77, 77, 0.3);
 }
 
 .nav-btn.logout-btn:hover {
@@ -124,7 +119,6 @@ body {
   box-shadow: 0 5px 15px rgba(255, 0, 0, 0.4);
 }
 
-/* Center Upload Button */
 .upload-btn-wrapper-center {
   position: relative;
   display: flex;
@@ -160,7 +154,7 @@ body {
   border: 2px solid rgba(255, 255, 255, 0.4);
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   animation: glow-pulse 3s infinite;
-  clip-path: circle(50% at 50% 50%); /* Extra assurance for circular shape */
+  clip-path: circle(50% at 50% 50%);
 }
 
 .upload-btn-wrapper-center:hover .add-stems-btn-center {
@@ -201,7 +195,6 @@ body {
   box-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
 }
 
-/* Upload Button Wrapper */
 .upload-btn-wrapper {
   position: relative;
   overflow: hidden;
@@ -221,7 +214,6 @@ body {
   border-radius: 50%;
 }
 
-/* Stems List */
 .stems-list {
   display: flex;
   flex-direction: column;
@@ -238,7 +230,7 @@ body {
   border-radius: 12px;
   padding: 16px;
   display: grid;
-  grid-template-columns: 175px 1fr 300px; /* Reduced width of first column */
+  grid-template-columns: 175px 1fr 300px;
   gap: 20px;
   align-items: center;
   width: 100%;
@@ -254,17 +246,15 @@ body {
 .stem-name {
   font-family: 'Antonio', sans-serif;
   font-weight: 800;
-  /* Colorful gradient text - Blue Purple */
   background: linear-gradient(135deg, #00C6FF, #9D50BB);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-size: 48px; /* reduced from 64px */
+  font-size: 48px;
   letter-spacing: 1px;
   text-transform: uppercase;
 }
 
-/* Logo */
 .logo {
   display: flex;
   align-items: center;
@@ -284,7 +274,6 @@ body {
   filter: drop-shadow(0 0 20px rgba(0, 229, 255, 0.3));
 }
 
-/* Buttons Base */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -379,7 +368,6 @@ input[type=range]::-webkit-slider-thumb {
   cursor: pointer;
 }
 
-/* Mix Controls */
 .mix-controls {
   background: var(--card-bg);
   padding: 24px;
@@ -392,7 +380,6 @@ input[type=range]::-webkit-slider-thumb {
   width: calc(100% - 40px);
 }
 
-/* Mix Actions wrapper for 2-column layout */
 .mix-actions-wrapper {
   display: flex;
   justify-content: center;
@@ -403,11 +390,9 @@ input[type=range]::-webkit-slider-thumb {
   background: transparent;
   border: none;
   position: relative;
-  overflow: hidden; /* Clips buttons to rounded shape */
+  overflow: hidden;
   z-index: 0;
 }
-
-/* Gradient border removed */
 
 .mix-action-column {
   flex: 1;
@@ -415,7 +400,6 @@ input[type=range]::-webkit-slider-thumb {
   justify-content: center;
 }
 
-/* Specific button styles - Moved here to ensure they override base .btn */
 .mix-btn {
   background: var(--primary);
   color: #000;
@@ -492,7 +476,6 @@ input[type=range]::-webkit-slider-thumb {
   100% { box-shadow: 0 0 10px rgba(142, 45, 226, 0.4); }
 }
 
-/* Progress Bar */
 .progress-container {
   width: 100%;
   height: 12px;
@@ -510,7 +493,6 @@ input[type=range]::-webkit-slider-thumb {
   box-shadow: 0 0 10px var(--primary);
 }
 
-/* Logs */
 .logs-container {
   margin-top: 20px;
   background: #000;
@@ -543,7 +525,6 @@ input[type=range]::-webkit-slider-thumb {
   overflow-y: auto;
 }
 
-/* Fancy Result Waveform */
 .result-waveform-card {
   margin: 30px auto 0;
   background: rgba(20, 20, 30, 0.8);
@@ -573,7 +554,7 @@ input[type=range]::-webkit-slider-thumb {
 
 .result-header h3 {
   margin: 0;
-  font-family: 'Poppins', sans-serif; /* Updated to Poppins */
+  font-family: 'Poppins', sans-serif;
   font-size: 18px;
   font-weight: 600;
   background: linear-gradient(to right, #fff, #bd00ff);
@@ -676,7 +657,6 @@ input[type=range]::-webkit-slider-thumb {
   color: var(--text-dim);
 }
 
-/* Auth Pages */
 .auth-page {
   display: flex;
   height: 100vh;
@@ -690,7 +670,6 @@ input[type=range]::-webkit-slider-thumb {
   align-items: center;
   justify-content: center;
   position: relative;
-  /* Remove background color/blur to blend with video as requested */
 }
 
 .auth-right {
@@ -703,7 +682,6 @@ input[type=range]::-webkit-slider-thumb {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* Mask image gradient for fade effect */
   -webkit-mask-image: linear-gradient(to right, transparent 0%, black 20%);
   mask-image: linear-gradient(to right, transparent 0%, black 20%);
 }
@@ -726,12 +704,12 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 .auth-container .logo h1 {
-  font-size: 64px; /* Reduced from 96px for auth pages */
+  font-size: 64px;
 }
 
 .auth-container h2 {
   font-family: 'Antonio', sans-serif;
-  font-size: 42px; /* Increased size to look better with Antonio */
+  font-size: 42px;
   margin-bottom: 10px;
   background: linear-gradient(to right, #fff, #00e5ff);
   -webkit-background-clip: text;
@@ -813,20 +791,9 @@ input[type=range]::-webkit-slider-thumb {
 .auth-footer a {
   color: var(--primary);
   text-decoration: none;
-  font-weight: 600;
-  margin-left: 5px;
+  transition: color 0.2s;
 }
 
 .auth-footer a:hover {
-  text-decoration: underline;
-}
-
-.error-message {
-  background: rgba(255, 50, 50, 0.1);
-  border: 1px solid rgba(255, 50, 50, 0.3);
-  color: #ff3333;
-  padding: 10px;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  font-size: 14px;
+  color: white;
 }

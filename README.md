@@ -1,114 +1,72 @@
-# Auralis
+# Auralis - Intelligent Audio Stem Mixer
 
-A Python program that takes multiple audio stems (drums, vocals, synth, bass, etc.) and mixes them together with adjustable parameters like gain, panning, and EQ. Now features a modern Web Interface with Authentication!
+Auralis is a professional-grade web-based audio stem mixer that leverages AI to automatically balance and process your multi-track audio projects. Built with a modern React frontend and a powerful Python FastAPI backend.
 
 ## Features
 
-- **Web Interface**: Modern React-based UI with login, registration, and dashboard.
-- **Individual Gain Control**: Adjust volume for each stem in decibels.
-- **AI-Powered Auto-Gain**: CNN-based automatic gain prediction for optimal balance.
-- **Panning**: Control left/right stereo position for each stem.
-- **EQ Filtering**: Apply high-pass and low-pass filters to individual stems.
-- **Automatic Sample Rate Conversion**: Handles different sample rates automatically.
-- **Mono to Stereo Conversion**: Converts mono audio to stereo automatically.
-- **Length Normalization**: Automatically handles stems of different lengths.
-- **Output Normalization**: Prevents clipping in the final mix.
+- **Smart Mixing Engine**: Automated gain balancing using rule-based algorithms (with CNN capabilities).
+- **Interactive Dashboard**: Real-time waveform visualization, volume faders, and panning controls.
+- **Mix History**: Automatically saves your mix sessions. View logs, replay past mixes, and download results.
+- **User Authentication**: Secure login and registration system with JWT authentication.
+- **Modern UI**: sleek, dark-themed interface with smooth animations and responsive design.
 
-## Installation
+## Architecture
+
+### Backend (`web_server/` & `audio_engine/`)
+- **Framework**: FastAPI
+- **Audio Processing**: Custom `audio_engine` using `numpy`, `librosa`, and `soundfile`.
+- **Database**: SQLAlchemy with SQLite (default).
+- **Authentication**: OAuth2 with Password hashing.
+
+### Frontend (`web_client/`)
+- **Framework**: React (Vite)
+- **Styling**: Pure CSS with advanced animations and glassmorphism effects.
+- **Visualization**: WaveSurfer.js for audio waveforms.
+- **Icons**: Lucide React.
+
+## Installation & Setup
 
 ### Prerequisites
-
 - Python 3.8+
-- Node.js & npm (for Web Client)
+- Node.js 16+
 
 ### 1. Backend Setup
 
-Install the required Python dependencies:
-
 ```bash
+# Install dependencies
 pip install -r requirements.txt
+
+# Run the server
+uvicorn web_server.main:app --reload
 ```
+The API will be available at `http://localhost:8000`.
 
 ### 2. Frontend Setup
 
-Navigate to the `web_client` directory and install Node.js dependencies:
-
 ```bash
 cd web_client
+
+# Install dependencies
 npm install
-```
 
-## Running the Application
-
-To interpret the full application, you need to run both the backend server and the frontend client.
-
-### 1. Start Support Backend
-
-From the root directory:
-
-```bash
-uvicorn web_server.main:app --reload
-```
-The API will run at `http://localhost:8000`.
-
-### 2. Start Web Client
-
-Open a new terminal, navigate to `web_client`, and start the dev server:
-
-```bash
-cd web_client
+# Run the development server
 npm run dev
 ```
-The web application will run at `http://localhost:5173`.
+The application will be accessible at `http://localhost:5173`.
 
-## Usages
+## Usage
 
-### Web Interface
+1. **Register/Login**: Create an account to access the mixer.
+2. **Import Stems**: Click the central "Import Stems" button to upload your audio tracks (drums, bass, vocals, etc.).
+3. **Adjust Controls**: Use the sliders to adjust gain (dB) and pan (L/R) for each stem.
+4. **AI Auto-Gain**: Toggle "CNN Based AI Auto Gain" to let the engine predict optimal levels.
+5. **Mix**: Click "Mix Audio" to process the final output.
+6. **History**: Access the history page to view previous mixes, logs, and download past creations.
 
-1.  **Register/Login**: Create an account to access the mixer.
-2.  **Dashboard**:
-    *   **Upload Stems**: Add your audio files (wav, mp3, etc.).
-    *   **Adjust Controls**: Set gain and panning for each stem.
-    *   **AI Auto-Gain**: Toggle the AI feature to automatically balance levels.
-    *   **Mix**: Click "Mix Audio" to process.
-    *   **Download**: Listen to and download the final mix.
+## Project Structure
 
-### CLI & Python API
-
-You can still use the command line tools and Python API as before.
-
-#### Quick Start
-
-```bash
-python quick_start.py
-```
-
-#### CLI Command
-
-```bash
-python audio_mixer.py <stems_directory> [output_file]
-```
-
-## Structure
-
-```
-Auralis/
-├── audio_mixer.py          # Core mixer logic
-├── web_server/             # FastAPI Backend
-│   ├── main.py             # API endpoints
-│   ├── models.py           # DB models
-│   ├── auth.py             # Auth logic
-│   └── ...
-├── web_client/             # React Frontend
-│   ├── src/
-│   │   ├── components/     # UI Components
-│   │   ├── pages/          # Login, Dashboard, etc.
-│   │   └── context/        # Auth Context
-│   └── ...
-├── stems/                  # Default stems directory
-└── ... (other scripts)
-```
-
-## License
-
-This project is open source and available for educational and personal use.
+- `audio_engine/`: Core Python modules for audio processing and gain prediction.
+- `web_server/`: FastAPI application, database models, and API endpoints.
+- `web_client/`: React source code, components, and pages.
+- `output/`: Generated mix files (git-ignored).
+- `temp_uploads/`: Temporary storage for uploaded stems (git-ignored).

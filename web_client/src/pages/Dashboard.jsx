@@ -86,7 +86,6 @@ function Dashboard() {
         setLogs("Initializing mix...\n");
         setProgress(0);
 
-        // Simulate progress
         const progressInterval = setInterval(() => {
             setProgress(prev => {
                 if (prev >= 90) return prev;
@@ -128,7 +127,6 @@ function Dashboard() {
             setMixUrl(`${API_URL}${data.url}?t=${timestamp}`);
             setLogs(data.logs || "Mix complete (no logs returned).");
 
-            // Update stems with optimal gains ONLY if auto-gain was used
             if (autoGain && data.gains) {
                 setStems(prev => {
                     const newStems = { ...prev };
@@ -196,7 +194,7 @@ function Dashboard() {
                                 key={name}
                                 name={name}
                                 url={data.url}
-                                file={data} // Pass the full data object including gain/pan
+                                file={data}
                                 onDelete={handleDeleteStem}
                                 onUpdate={handleUpdateStem}
                             />
@@ -212,7 +210,7 @@ function Dashboard() {
                                 onClick={() => {
                                     const newState = !autoGain;
                                     setAutoGain(newState);
-                                    setUseCNN(newState); // Enable CNN by default when AI is on
+                                    setUseCNN(newState);
                                 }}
                             >
                                 {autoGain ? <>CNN Based AI Auto Gain <span className="status-highlight">ACTIVE</span></> : 'Activate CNN Based AI Auto Gain'}

@@ -15,42 +15,35 @@ from datetime import datetime
 import io
 import contextlib
 
-# Add parent directory to path to import audio_mixer
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from audio_mixer import StemMixer
+from audio_engine.audio_mixer import StemMixer
 
-# Import Auth modules
 from . import models, database, auth_router, auth
 
 app = FastAPI()
 
-# Create tables
 models.Base.metadata.create_all(bind=database.engine)
 
-# Include Auth Router
 app.include_router(auth_router.router)
 
-# CORS setup
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, specify the frontend origin
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Directories
 UPLOAD_DIR = Path("temp_uploads")
 OUTPUT_DIR = Path("output")
 UPLOAD_DIR.mkdir(exist_ok=True)
 OUTPUT_DIR.mkdir(exist_ok=True)
 
-# Mount static files to serve stems and output
 app.mount("/static", StaticFiles(directory="temp_uploads"), name="static")
 app.mount("/output", StaticFiles(directory="output"), name="output")
 
 class MixRequest(BaseModel):
-    stems: Dict[str, str]  # name -> filename (in temp_uploads)
+    stems: Dict[str, str]
     gains: Dict[str, float]
     pans: Dict[str, float]
     auto_gain: bool = False
@@ -78,7 +71,6 @@ async def mix_audio(request: MixRequest, current_user: models.User = Depends(aut
     try:
         mixer = StemMixer(sample_rate=44100)
         
-        # Prepare stems dict with full paths
         stems_paths = {}
         for name, filename in request.stems.items():
             path = UPLOAD_DIR / filename
@@ -86,10 +78,8 @@ async def mix_audio(request: MixRequest, current_user: models.User = Depends(aut
                 raise HTTPException(status_code=404, detail=f"Stem {name} not found")
             stems_paths[name] = str(path)
             
-        # Capture stdout to get logs
         log_capture = io.StringIO()
         with contextlib.redirect_stdout(log_capture):
-            # Perform mixing
             mixed_audio, used_gains = mixer.mix_stems(
                 stems=stems_paths,
                 gains=request.gains,
@@ -101,7 +91,6 @@ async def mix_audio(request: MixRequest, current_user: models.User = Depends(aut
         
         logs = log_capture.getvalue()
         
-        # Generate unique filename for history
         timestamp_str = datetime.now().strftime("%Y%m%d_%H%M%S")
         unique_id = str(uuid.uuid4())[:8]
         output_filename = f"mix_{current_user.username}_{timestamp_str}_{unique_id}.wav"
@@ -109,7 +98,6 @@ async def mix_audio(request: MixRequest, current_user: models.User = Depends(aut
         
         mixer.save_audio(mixed_audio, str(output_path))
         
-        # Create history entry
         summary = f"{len(request.stems)} stems. Auto-Gain: {'On' if request.auto_gain else 'Off'}. CNN: {'On' if request.use_cnn else 'Off'}."
         
         history_entry = models.MixHistory(
@@ -149,8 +137,6 @@ async def delete_history_item(item_id: int, current_user: models.User = Depends(
     if not history_item:
         raise HTTPException(status_code=404, detail="History item not found")
     
-    # Optional: Delete the actual file if desired. For now, we'll keep the file or just delete the record.
-    # Let's delete the file to be clean
     try:
         file_path = OUTPUT_DIR / history_item.output_filename
         if file_path.exists():
