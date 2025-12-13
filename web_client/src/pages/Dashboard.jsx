@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect, useContext } from 'react';
 import StemRow from '../components/StemRow';
+import { Link } from 'react-router-dom';
 import ResultWaveform from '../components/ResultWaveform';
 import { Upload, Play, Download, Music, Terminal, LogOut } from 'lucide-react';
 import AuthContext from '../context/AuthContext';
@@ -153,22 +154,33 @@ function Dashboard() {
     return (
         <div className="app-container page-fade-in">
             <header className="app-header">
-                <div className="logo">
-                    <Music size={32} color="#00e5ff" />
-                    <h1>Auralis</h1>
+                <div className="header-left">
+                    <div className="logo">
+                        <Music size={32} color="#00e5ff" />
+                        <h1>Auralis</h1>
+                    </div>
                 </div>
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-                    <span style={{ fontFamily: 'Manrope, sans-serif', fontWeight: 600 }}>Welcome, {user?.username}</span>
-                    <button onClick={logout} className="btn icon-btn" title="Logout" style={{ color: '#fff' }}>
-                        <LogOut size={24} />
-                    </button>
-                    <div className="upload-btn-wrapper">
-                        <button className="btn primary-btn add-stems-btn">
-                            <Upload size={32} />
+                <div className="header-center">
+                    <div className="upload-btn-wrapper-center">
+                        <button className="btn primary-btn add-stems-btn-center">
+                            <Upload size={40} />
                         </button>
                         <input type="file" multiple accept="audio/*" onChange={handleFileUpload} />
+                        <span className="upload-label">Import Stems</span>
                     </div>
+                </div>
+
+                <div className="header-right">
+                    <span className="user-welcome">Welcome, {user?.username}</span>
+                    <Link to="/history" className="btn nav-btn" title="History">
+                        <Terminal size={20} />
+                        <span>History</span>
+                    </Link>
+                    <button onClick={logout} className="btn nav-btn logout-btn" title="Logout">
+                        <LogOut size={20} />
+                        <span>Logout</span>
+                    </button>
                 </div>
             </header>
 

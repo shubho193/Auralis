@@ -6,6 +6,7 @@ import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Welcome from './pages/Welcome';
+import History from './pages/History';
 import bgVideo from './assets/video.mp4';
 import './App.css';
 
@@ -26,6 +27,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Welcome />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/history"
+            element={
+              <ProtectedRoute>
+                <History />
               </ProtectedRoute>
             }
           />

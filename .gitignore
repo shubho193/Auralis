@@ -1,0 +1,15 @@
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Application artifacts
+output/
+temp_uploads/
+stems/
+
+# Environment
+.env
+venv/
+env/

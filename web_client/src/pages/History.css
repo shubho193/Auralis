@@ -1,0 +1,122 @@
+.history-page {
+    padding: 40px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    min-height: 100vh;
+}
+
+.history-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.history-header h1 {
+    font-family: 'Antonio', sans-serif;
+    font-size: 3rem;
+    color: var(--primary);
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.history-item {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.history-item:hover {
+    border-color: var(--primary);
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.1);
+}
+
+.history-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.history-date {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #fff;
+    font-family: 'Antonio', sans-serif;
+    letter-spacing: 1px;
+}
+
+.history-summary {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+}
+
+.history-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: flex-end;
+}
+
+.log-viewer {
+    background: #000;
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 15px;
+    font-family: 'Consolas', monospace;
+    font-size: 0.85rem;
+    color: #0f0;
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid #333;
+    text-align: left;
+    white-space: pre-wrap;
+}
+
+.btn-small {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    border-radius: 6px;
+}
+
+.back-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.back-btn:hover {
+    color: var(--primary);
+}
+
+.delete-history-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 77, 77, 0.3);
+    color: #ff4d4d;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.delete-history-btn:hover {
+    background: rgba(255, 0, 0, 0.15);
+    border-color: #ff0000;
+    color: #ff0000;
+    box-shadow: 0 5px 15px rgba(255, 0, 0, 0.4);
+    transform: translateY(-2px);
+}

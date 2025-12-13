@@ -49,6 +49,7 @@ body {
   flex-direction: column;
 }
 
+/* Header Layout */
 .app-header {
   display: flex;
   justify-content: space-between;
@@ -58,56 +59,135 @@ body {
   border-bottom: 1px solid var(--border);
 }
 
-.logo {
+.header-left {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.header-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.header-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 20px;
+}
+
+.user-welcome {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 600;
+  margin-right: 10px;
+}
+
+/* Nav Buttons (History, Logout) */
+.nav-btn {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 10px 20px;
+  border-radius: 30px;
+  color: var(--text-main);
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.logo h1 {
-  font-family: 'Aquire Bold', 'Aquire', 'Integral CF', 'Poppins', sans-serif;
-  font-size: 96px;
-  font-weight: 800;
-  margin: 0;
-  background: linear-gradient(135deg, #fff 0%, #00e5ff 50%, #bd00ff 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  letter-spacing: 4px;
-  filter: drop-shadow(0 0 20px rgba(0, 229, 255, 0.3));
+.nav-btn span {
+  font-weight: 600;
+  font-size: 14px;
 }
 
-/* Buttons */
-.btn {
-  display: inline-flex;
+.nav-btn:hover {
+  background: rgba(0, 229, 255, 0.15);
+  border-color: var(--primary);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 229, 255, 0.2);
+}
+
+.nav-btn.logout-btn {
+  color: #ff4d4d;
+  border-color: rgba(255, 77, 77, 0.3); /* Subtle red border */
+}
+
+.nav-btn.logout-btn:hover {
+  background: rgba(255, 0, 0, 0.15);
+  border-color: #ff0000;
+  color: #ff0000;
+  box-shadow: 0 5px 15px rgba(255, 0, 0, 0.4);
+}
+
+/* Center Upload Button */
+.upload-btn-wrapper-center {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.upload-btn-wrapper-center input[type=file] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.add-stems-btn-center {
+  width: 80px !important;
+  height: 80px !important;
+  min-width: 80px !important;
+  min-height: 80px !important;
+  border-radius: 50% !important;
+  padding: 0 !important;
+  display: flex !important;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 10px 20px;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  border: none;
-  font-size: 14px;
-  font-family: 'Manrope', sans-serif; /* Ensure Manrope is used */
-}
-
-.add-stems-btn {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  padding: 0;
   background: linear-gradient(135deg, #00e5ff, #bd00ff);
-  box-shadow: 0 10px 25px rgba(0, 229, 255, 0.4);
+  box-shadow: 0 0 30px rgba(0, 229, 255, 0.4);
   color: white;
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: glow-pulse 3s infinite;
+  clip-path: circle(50% at 50% 50%); /* Extra assurance for circular shape */
 }
 
-.add-stems-btn:hover {
-  transform: scale(1.1) rotate(90deg);
-  box-shadow: 0 15px 35px rgba(189, 0, 255, 0.6);
+.upload-btn-wrapper-center:hover .add-stems-btn-center {
+  transform: scale(1.15);
+  box-shadow: 0 0 50px rgba(0, 229, 255, 0.8), 0 0 80px rgba(189, 0, 255, 0.4);
   background: linear-gradient(135deg, #bd00ff, #00e5ff);
+  border-color: #fff;
+}
+
+.upload-label {
+  font-size: 12px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: color 0.3s;
+  pointer-events: none;
+}
+
+.upload-btn-wrapper-center:hover .upload-label {
+  color: var(--primary);
+  text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+}
+
+@keyframes glow-pulse {
+  0% { box-shadow: 0 0 20px rgba(0, 229, 255, 0.4); }
+  50% { box-shadow: 0 0 40px rgba(189, 0, 255, 0.6); }
+  100% { box-shadow: 0 0 20px rgba(0, 229, 255, 0.4); }
 }
 
 .primary-btn {
@@ -119,56 +199,6 @@ body {
 .primary-btn:hover {
   background: rgba(0, 229, 255, 0.2);
   box-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
-}
-
-.mix-btn {
-  background: var(--primary);
-  color: #000;
-  font-family: 'Antonio', sans-serif;
-  font-weight: 700;
-  text-transform: uppercase;
-  font-size: 28px; /* Slightly smaller super big */
-  padding: 20px 48px;
-  width: 100%;
-  border-radius: 0;
-  margin: 0;
-  height: 100%;
-  min-height: 100px;
-}
-
-/* ... */
-.ai-btn {
-  background: linear-gradient(45deg, #2b0057, #4a00e0);
-  color: #fff;
-  font-family: 'Antonio', sans-serif;
-  font-weight: 700;
-  text-transform: uppercase;
-  font-size: 28px; /* Slightly smaller super big */
-  border-radius: 0;
-  margin: 0;
-  width: 100%;
-  height: 100%;
-  min-height: 100px;
-  border: none;
-}
-
-
-.mix-btn:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 0 20px rgba(0, 229, 255, 0.4);
-}
-
-/* Gradient border removed for mix button */
-
-@keyframes gradient-move {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-.mix-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
 }
 
 /* Upload Button Wrapper */
@@ -232,6 +262,42 @@ body {
   font-size: 48px; /* reduced from 64px */
   letter-spacing: 1px;
   text-transform: uppercase;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo h1 {
+  font-family: 'Aquire Bold', 'Aquire', 'Integral CF', 'Poppins', sans-serif;
+  font-size: 96px;
+  font-weight: 800;
+  margin: 0;
+  background: linear-gradient(135deg, #fff 0%, #00e5ff 50%, #bd00ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 4px;
+  filter: drop-shadow(0 0 20px rgba(0, 229, 255, 0.3));
+}
+
+/* Buttons Base */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: none;
+  font-size: 14px;
+  font-family: 'Manrope', sans-serif;
 }
 
 .icon-btn {
@@ -349,13 +415,53 @@ input[type=range]::-webkit-slider-thumb {
   justify-content: center;
 }
 
-/* Divider removed */
-
-.checkbox-group {
-  display: none;
+/* Specific button styles - Moved here to ensure they override base .btn */
+.mix-btn {
+  background: var(--primary);
+  color: #000;
+  font-family: 'Antonio', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 28px;
+  padding: 20px 48px;
+  width: 100%;
+  border-radius: 0;
+  margin: 0;
+  height: 100%;
+  min-height: 100px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Removed duplicate .ai-btn styles */
+.mix-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.4);
+}
+
+.mix-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ai-btn {
+  background: linear-gradient(45deg, #2b0057, #4a00e0);
+  color: #fff;
+  font-family: 'Antonio', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 28px;
+  border-radius: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 100px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 .ai-btn:hover {
   filter: brightness(1.2);
