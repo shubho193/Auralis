@@ -12,10 +12,14 @@ Auralis is a professional-grade web-based audio stem mixer that leverages AI to 
 
 ## Showcase
 
-![App Screenshot 1](assets/showcase_4.png)
-![App Screenshot 2](assets/showcase_2.png)
-![App Screenshot 3](assets/showcase_1.png)
-![App Screenshot 4](assets/showcase_3.png)
+<p float="left">
+  <img src="assets/showcase_4.png" width="49%" />
+  <img src="assets/showcase_2.png" width="49%" /> 
+</p>
+<p float="left">
+  <img src="assets/showcase_1.png" width="49%" />
+  <img src="assets/showcase_3.png" width="49%" />
+</p>
 
 ## Architecture
 
