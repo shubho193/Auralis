@@ -10,6 +10,13 @@ Auralis is a professional-grade web-based audio stem mixer that leverages AI to 
 - **User Authentication**: Secure login and registration system with JWT authentication.
 - **Modern UI**: sleek, dark-themed interface with smooth animations and responsive design.
 
+## Showcase
+
+![App Screenshot 1](assets/showcase_4.png)
+![App Screenshot 2](assets/showcase_2.png)
+![App Screenshot 3](assets/showcase_1.png)
+![App Screenshot 4](assets/showcase_3.png)
+
 ## Architecture
 
 ### Backend (`web_server/` & `audio_engine/`)
